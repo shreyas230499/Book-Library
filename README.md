@@ -13,3 +13,6 @@ npm start
 
 Link to the Postman Collection:
 https://documenter.getpostman.com/view/21292915/2s9YXfcPbF 
+
+
+Note: In the "update summary" API, we can only change the book's summary, not its title or author. This rule helps us maintain accurate book information in our database and prevents misuse of title and author details after adding a book.
