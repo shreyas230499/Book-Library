@@ -3,8 +3,8 @@
 ## steps to run the application
 Open the Terminal and enter the following commands
 ```
-git clone [] 
-cd [repo name]
+git clone https://github.com/shreyas230499/Book-Library.git 
+cd Book-Library
 npm i
 npm start
 ```
