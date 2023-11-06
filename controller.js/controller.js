@@ -10,8 +10,8 @@ const addBook = async (req, res) => {
     if (bookExist) {
       return res.status(400).json({ message: "Book Title Already Exist" });
     }
-    const savedUser = await new Books( {title,author,summary}).save();
-    return res.status(200).json(savedUser);
+    const savedBook = await new Books( {title,author,summary}).save();
+    return res.status(200).json(savedBook);
   } catch (error) {
     console.log(error)
     return res.status(400).json({ message: "Something went wrong while adding book" });
@@ -34,22 +34,20 @@ const getBookList = async (req, res) => {
 //get single book
 const getBookById = async (req, res) => {
   try {
-    payload = req.params.id;
-    console.log(payload);
-    if (payload === undefined || !payload) {
-      console.log("no id present in params");
-      return;
+    const bookId = req.params.id;
+    if (!bookId) {
+      return res.status(400).json({ message: "Book ID is missing in request parameters" });
     }
-    const user = await Books.findById({ _id: payload });
-    console.log(user);
-    res.status(200).json(user);
+    const book = await Books.findById(bookId);
+    if (!book) {
+      return res.status(404).json({ message: "Book does not exist" });
+    }
+    res.status(200).json(book);
   } catch (error) {
-    res
-      .status(400)
-      .json({ message: "something went wrong while getting the single book" });
-    console.log("something went wrong while getting the single book");
+    res.status(500).json({ message: "Something went wrong while getting the single book" });
   }
 };
+
 
 const deleteBook = async (req, res) => {
   try {
